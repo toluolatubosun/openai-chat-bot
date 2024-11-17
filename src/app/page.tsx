@@ -2,11 +2,12 @@
 
 import React from "react";
 import Image from 'next/image'
+import parse from 'html-react-parser';
 
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import { useToast } from "@/components/ui/use-toast"
 import { Separator } from "@/components/ui/separator"
-import { useToast } from "@/components/ui/use-toast";
 import { ScrollArea } from "@/components/ui/scroll-area"
 
 import Languages from "@/constants/languages"
@@ -19,15 +20,19 @@ export default function Home() {
 
 	const inputRef = React.useRef<HTMLInputElement>(null);
 
-	const [messages, setMessages] = React.useState([
+	const [messages, setMessages] = React.useState<{ source: string; message: string; imageBase64?: string; }[]>([
 		{
 			source: "system",
-			message: "Hi friend 👋, Welcome to <b>Polly Glot</b>, your multilingual chatbot."
+			message: "Hi friend 👋, Welcome to <b>Polly Glot</b>, your multilingual chatbot and image generator"
 		},
 		{
 			source: "system",
-			message: "Select a language, and get chatty!"
+			message: "Select a language from the top you want me to respond in, and start chatting with me 😃"
 		},
+		{
+			source: "system",
+			message: "If you want to generate an image, just type <b>gen-img:</b> and the text you want to generate the image for 😎"
+		}
 	]);
 
 	const handleSendMessage = async () => {
@@ -60,7 +65,7 @@ export default function Home() {
 			toast({ title: "Error getting response", description: data.message, variant: "destructive" });
 		} else {
 			inputRef.current.value = "";
-			setMessages((messages) => [...messages, message, { source: "system", message: data.message }]);
+			setMessages((messages) => [...messages, message, { source: "system", message: data.message, imageBase64: data.image_base64 }]);
 		}
 
 		setIsLoading(false);
@@ -95,8 +100,10 @@ export default function Home() {
 							<div
 								key={index}
 								className={`p-2 rounded-md w-fit break-words max-w-60 lg:max-w-96 ${msg.source === 'user' ? 'bg-blue-200 text-blue-900 ml-auto' : 'bg-gray-200 text-gray-900 mr-auto'}`}
-								dangerouslySetInnerHTML={{ __html: msg.message }}
-							/>
+							>
+								{parse(msg.message)}
+								{msg.imageBase64 && <img src={`data:image/png;base64,${msg.imageBase64}`} alt="Generated Image" className="w-full h-auto mt-2" />}
+							</div>
 						))}
 					</div>
 
