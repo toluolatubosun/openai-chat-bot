@@ -37,6 +37,14 @@ export async function POST(req: NextRequest) {
 	];
 
 	try {
+		const moderation = await openai.moderations.create({ input: body.message.message })
+
+		if (moderation.results[0].flagged) {
+			const categories = moderation.results[0].categories;
+			//@ts-ignore
+			return NextResponse.json({ success: false, message: `Your message was flagged as ${Object.keys(categories).filter(category => categories[category]).join(", ")}` });
+		}
+
 		if (body.message.message.startsWith("gen-img:")) {
 			const response = await openai.images.generate({
 				model: "dall-e-3",
