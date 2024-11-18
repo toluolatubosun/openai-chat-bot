@@ -1,4 +1,4 @@
-# Multilingual ChatBot made with OpenAI GPT-3
+# Multilingual ChatBot made with OpenAI GPT-3 and DALL-E 3
 
 This is a multilingual chatbot made with OpenAI GPT-3. It can understand and respond in multiple languages. The chatbot is built using the OpenAI GPT-3 API.
 
