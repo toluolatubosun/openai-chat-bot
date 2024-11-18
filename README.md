@@ -25,3 +25,9 @@ OPEN_AI_API_KEY=YOUR_OPENAI_API_KEY
 ```bash
 yarn dev
 ```
+
+## Demo Video
+
+https://github.com/user-attachments/assets/f7be9ad2-c48b-4f2d-adcf-47495e6d47c3
+
+
