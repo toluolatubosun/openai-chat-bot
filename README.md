@@ -3,10 +3,10 @@
 This is a multilingual chatbot made with OpenAI GPT-3. It can understand and respond in multiple languages. The chatbot is built using the OpenAI GPT-3 API.
 
 ## Features
-> Real-time chat with the chatbot in multiple languages.
-> Supports multiple languages including English, French and German.
-> The chatbot can understand and respond in multiple languages.
-> Generate images based on the user's input.
+- Real-time chat with the chatbot in multiple languages.
+- Supports multiple languages including English, French and German.
+- The chatbot can understand and respond in multiple languages.
+- Generate images based on the user's input.
 
 ## Setup
 1. Clone the repository.
